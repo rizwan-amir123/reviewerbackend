@@ -18,21 +18,23 @@ const getReviews = (req, res) => {
 const addReview = (req, res) => {
   console.log(req.body)
     const review = new Review ({
-        overall: req.body.overall,
-        reviewText: req.body.reviewText,
-        summary: req.body.summary,
         image: req.body.image,
+        overall: req.body.overall,
         verified: req.body.verified,
+        reviewTime: "",
         reviewerID: req.body.reviewerID,
         asin: req.body.asin,
+        style: {"Size": "", "Color": ""},
         reviewerName: req.body.reviewerName,
+        reviewText: req.body.reviewText,
+        summary: req.body.summary,
         unixReviewTime: req.body.unixReviewTime,
     });
 
-    Review
-        .save(review)
-        .then(data => res.json(data))
+    Review.save(review)
+        .then(data => {console.log("HHHHHHHHHH");res.json(data)})
         .catch (err => {
+            console.log("here")
             res.status(500).send({
                 message:err.message || "An error occured"
             });
